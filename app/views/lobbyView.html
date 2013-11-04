@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="jumbotron col-sm-8"><h1>Battleships</h1><p>At least better than the movie</p></div>
+</div>
+<div class="row">
+    <div class="col-sm-3" ng-controller="userController">
+        <label>current user:</label><input class="form-control" type="text" ng-model="username" ng-readonly="true" disabled>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <div id="lobbyBoardMain">
+            <table class="boardTable">
+                <tr>
+                    <td class="boardHeader"></td><td ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]" class="boardHeader">{{x}}</td>
+                </tr>
+                <tr ng-repeat="(y, row) in board">
+                    <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]" class="boardHeader"></td>
+                    <td ng-repeat="(x, fieldValue) in row" class="boardField">
+                        <div class="fieldDiv"
+                             ng-class="{ship: fieldValue > 0, selected: fieldValue < 0}"
+                             ng-click="select(x, y)"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="lobbyBoardRight">
+            <div ng-repeat="shipLength in availableShips">
+                <span ng-repeat="slot in range(shipLength)"></span>
+            </div>
+        </div>
+        <div id="lobbyBoardBottom">
+            <button class="btn btn-default btn-sm" ng-click="randomShips()">random</button>
+            <button class="btn btn-default btn-sm" ng-click="resetShips()">reset</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-primary"  ng-click="joinGame()">join game</button>
+    </div>
+</div>
