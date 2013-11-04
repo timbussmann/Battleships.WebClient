@@ -13,4 +13,4 @@ angular.module('battleships', []
 
         $locationProvider.html5Mode(true);
         }
-    ).constant('serverUrl', 'http://localhost:58885/');
+    ).constant('serverUrl', 'http://localhost:58886/');
