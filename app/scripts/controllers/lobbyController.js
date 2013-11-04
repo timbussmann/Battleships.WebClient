@@ -1,5 +1,5 @@
 'use strict'
-angular.module('battleships').controller('lobbyController', function ($scope, $http, $location, userService, serverUrl) {
+angular.module('battleships').controller('lobbyController', function ($scope, $http, $location, userService, serverUrl, toastr) {
     var board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,10 +64,8 @@ angular.module('battleships').controller('lobbyController', function ($scope, $h
             }
             selected = undefined;
         }
-        console.log('selected pos ' + x + ',' + y);
     };
 
-    var serverUrl = 'http://localhost:58885/game'
     $scope.joinGame = function () {
         var allCoordinates = [];
         for (var y = 0; y < board.length; y++) {
@@ -87,7 +85,7 @@ angular.module('battleships').controller('lobbyController', function ($scope, $h
             return group;
         });
 
-        $http.post(serverUrl, {
+        $http.post(serverUrl + 'game', {
             Name: userService.username,
             Ships: ships
         }).success(function (result) {
