@@ -11,6 +11,6 @@ angular.module('battleships', []
             .otherwise({
                 redirectTo: '/' });
 
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
         }
     ).constant('serverUrl', 'http://localhost:58886/');
