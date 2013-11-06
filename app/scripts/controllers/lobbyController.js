@@ -1,5 +1,7 @@
 'use strict'
-angular.module('battleships').controller('lobbyController', function ($scope, $http, $location, userService, serverUrl, toastr) {
+angular.module('battleships').controller('lobbyController', function (
+    $scope, $http, $location, serverUrl, toastr, $routeParams) {
+    var username = $routeParams.username;
     var board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -86,11 +88,11 @@ angular.module('battleships').controller('lobbyController', function ($scope, $h
         });
 
         $http.post(serverUrl + 'game', {
-            Name: userService.username,
+            Name: username,
             Ships: ships
         }).success(function (result) {
                 toastr.success('joining game ' + result.GameId);
-                $location.path('/game/' + result.GameId + '/' + userService.username);
+                $location.path('/game/' + result.GameId + '/' + username);
             }).error(function (error) {
                 toastr.error(error.ExceptionMessage, error.Message);
             });
@@ -138,7 +140,7 @@ angular.module('battleships').controller('lobbyController', function ($scope, $h
         board[1][9] = 10;
 
         $scope.availableShips.splice(0, $scope.availableShips.length);
-    }
+    };
 
     $scope.resetShips = function(){
         for(var i = 0; i < 10; i++){
@@ -148,7 +150,7 @@ angular.module('battleships').controller('lobbyController', function ($scope, $h
         }
 
         $scope.availableShips = shipsToUse.slice(0);
-    }
+    };
 
     function removeShipWithLength(distance) {
         var index = $scope.availableShips.indexOf(distance);

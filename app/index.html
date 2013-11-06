@@ -30,7 +30,10 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-        <div  ng-view>
+        <div class="row">
+            <div class="jumbotron col-md-6 col-md-offset-3"><h1>Battleships</h1><p>At least better than the movie</p></div>
+        </div>
+        <div ng-view>
         </div>
     </div>
 
@@ -51,6 +54,7 @@
         <script src="scripts/controllers/lobbyController.js"></script>
         <script src="scripts/controllers/gameController.js"></script>
         <script src="scripts/controllers/userController.js"></script>
+        <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/userService.js"></script>
         <!-- endbuild -->
 </body>

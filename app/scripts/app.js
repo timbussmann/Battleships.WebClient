@@ -3,8 +3,12 @@ angular.module('battleships', []
     ).config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
+                controller: 'loginController',
+                templateUrl: '/views/loginView.html' })
+            .when('/lobby/:username', {
                 controller: 'lobbyController',
-                templateUrl: '/views/lobbyView.html' })
+                templateUrl: '/views/lobbyView.html'
+            })
             .when('/game/:gameId/:username', {
                 controller: 'gameController',
                 templateUrl: '/views/gameView.html' })

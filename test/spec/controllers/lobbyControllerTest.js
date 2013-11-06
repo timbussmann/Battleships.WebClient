@@ -1,9 +1,11 @@
 'use strict'
 describe('Lobby Controller', function(){
-    var scope, $rootScope, $httpBackend, serverUrl, $location, userService;
+    var scope, $rootScope, $httpBackend, serverUrl, $location, $routeParams;
+    var username = 'testUserName';
     serverUrl = '/testServerUrl/';
-    $location = {};
-    userService = { username: 'testUsername' };
+    $routeParams = {
+        username: username
+    };
     var toastrStub = {
         info: function(){},
         error: function(){},
@@ -11,9 +13,10 @@ describe('Lobby Controller', function(){
     };
 
     beforeEach(module('battleships'));
-    beforeEach(inject(function(_$httpBackend_, _$rootScope_){
+    beforeEach(inject(function(_$httpBackend_, _$rootScope_, _$location_){
         $httpBackend = _$httpBackend_;
         $rootScope = _$rootScope_;
+        $location = _$location_;
     }));
     beforeEach(createController);
 
@@ -79,59 +82,8 @@ describe('Lobby Controller', function(){
 
         it('should call server with username and selected ships', function(){
             $httpBackend.expectPOST(serverUrl + 'game', {
-                Name: userService.username,
-                Ships: [
-                    [
-                        {x: 0, y: 0},
-                        {x: 0, y: 1},
-                        {x: 0, y: 2},
-                        {x: 0, y: 3},
-                        {x: 0, y: 4}
-                    ],
-                    [
-                        {x: 1, y: 0},
-                        {x: 1, y: 1},
-                        {x: 1, y: 2},
-                        {x: 1, y: 3}
-                    ],
-                    [
-                        {x: 2, y: 0},
-                        {x: 2, y: 1},
-                        {x: 2, y: 2},
-                        {x: 2, y: 3}
-                    ],
-                    [
-                        {x: 3, y: 0},
-                        {x: 3, y: 1},
-                        {x: 3, y: 2}
-                    ],
-                    [
-                        {x: 4, y: 0},
-                        {x: 4, y: 1},
-                        {x: 4, y: 2}
-                    ],
-                    [
-                        {x: 5, y: 0},
-                        {x: 5, y: 1},
-                        {x: 5, y: 2}
-                    ],
-                    [
-                        {x: 6, y: 0},
-                        {x: 6, y: 1}
-                    ],
-                    [
-                        {x: 7, y: 0},
-                        {x: 7, y: 1}
-                    ],
-                    [
-                        {x: 8, y: 0},
-                        {x: 8, y: 1}
-                    ],
-                    [
-                        {x: 9, y: 0},
-                        {x: 9, y: 1}
-                    ]
-                ]
+                Name: username,
+                Ships: validShips
             }).respond();
 
             scope.joinGame();
@@ -139,7 +91,18 @@ describe('Lobby Controller', function(){
 
         describe('when game joined', function(){
             it('should switch to game view', function(){
-                expect(true).toBe(false);
+                var gameId = 'testGameId'
+                spyOn($location, 'path');
+
+                $httpBackend.expectPOST(serverUrl + 'game', {
+                    Name: username,
+                    Ships: validShips
+                }).respond({ GameId: gameId });
+
+                scope.joinGame();
+                $httpBackend.flush();
+
+                expect($location.path).toHaveBeenCalledWith('/game/' + gameId + '/' + username);
             })
         });
     });
@@ -177,9 +140,62 @@ describe('Lobby Controller', function(){
                 $scope: scope,
                 serverUrl: serverUrl,
                 toastr: toastrStub,
-                userService : userService
+                $routeParams: $routeParams
             });
         });
     }
+
+    var validShips = [
+        [
+            {x: 0, y: 0},
+            {x: 0, y: 1},
+            {x: 0, y: 2},
+            {x: 0, y: 3},
+            {x: 0, y: 4}
+        ],
+        [
+            {x: 1, y: 0},
+            {x: 1, y: 1},
+            {x: 1, y: 2},
+            {x: 1, y: 3}
+        ],
+        [
+            {x: 2, y: 0},
+            {x: 2, y: 1},
+            {x: 2, y: 2},
+            {x: 2, y: 3}
+        ],
+        [
+            {x: 3, y: 0},
+            {x: 3, y: 1},
+            {x: 3, y: 2}
+        ],
+        [
+            {x: 4, y: 0},
+            {x: 4, y: 1},
+            {x: 4, y: 2}
+        ],
+        [
+            {x: 5, y: 0},
+            {x: 5, y: 1},
+            {x: 5, y: 2}
+        ],
+        [
+            {x: 6, y: 0},
+            {x: 6, y: 1}
+        ],
+        [
+            {x: 7, y: 0},
+            {x: 7, y: 1}
+        ],
+        [
+            {x: 8, y: 0},
+            {x: 8, y: 1}
+        ],
+        [
+            {x: 9, y: 0},
+            {x: 9, y: 1}
+        ]
+    ];
 
 });
