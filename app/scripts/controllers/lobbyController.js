@@ -87,13 +87,16 @@ angular.module('battleships').controller('lobbyController', function (
             return group;
         });
 
+        $scope.showLoadingScreen = true;
         $http.post(serverUrl + 'game', {
             Name: username,
             Ships: ships
         }).success(function (result) {
+                $scope.showLoadingScreen = false;
                 toastr.success('joining game ' + result.GameId);
                 $location.path('/game/' + result.GameId + '/' + username);
             }).error(function (error) {
+                $scope.showLoadingScreen = false;
                 toastr.error(error.ExceptionMessage, error.Message);
             });
     };
