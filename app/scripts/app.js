@@ -12,6 +12,9 @@ angular.module('battleships', []
             .when('/game/:gameId/:username', {
                 controller: 'gameController',
                 templateUrl: '/views/gameView.html' })
+            .when('/servernotfound', {
+                templateUrl: 'views/serverNotFoundView.html'
+            })
             .otherwise({
                 redirectTo: '/' });
 
