@@ -1,5 +1,20 @@
 angular.module('battleships')
     .value('toastr', toastr)
+    .directive('loadingScreenModal', function(){
+        return function(scope, element, attrs){
+            scope.$watch(attrs.loadingScreenModal, function(value){
+                if(value){
+                    $('#loadingScreen').modal({
+                        show: true,
+                        keyboard: false,
+                        backdrop: 'static'
+                    });
+                } else{
+                    $('#loadingScreen').modal('hide');
+                }
+            });
+        };
+    })
     .run(function($rootScope, serverUrl, $location){
         try{
             $.connection.hub.url = serverUrl + 'signalr';
