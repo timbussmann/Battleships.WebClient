@@ -1,11 +1,53 @@
-.row{
+.jumbotron{
+    padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.boardTable {
+.row{
+    padding-bottom: 10px;
+}
+
+.boardContainer{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.dummy{
+    margin-top: 100%;
+}
+
+.board{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+}
+
+.board .boardH{
+    height: 5%;
+}
+.board .boardF{
+    width: 9.5%;
+    box-sizing: border-box;
+    background-color: #0ad6ff;
+    border: 1px solid #dddddd;;
+}
+
+.boardF:hover{
     border: 1px solid black;
-    border-collapse: collapse;
-    border-spacing: 0;
+}
+
+.boardTable {
+    background-color: #dddddd;
+    border: 1px solid black;
+    border-collapse: separate;
+    border-spacing: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 .boardTable .ship {
@@ -33,47 +75,12 @@
 .fieldDiv:not(.ship):hover {
     border: 1px solid #000000;
 }
-#lobbyBoardMain {
-    display: block;
-    float: left;
-    padding: 0px 20px 20px 0;
-}
-#lobbyBoardBottom {
-    clear: both;
-}
-#lobbyBoardRight {
-    display: inline-block;
-    float: left;
-}
 
-#lobbyBoardRight span{
+#shipCounter span {
     height: 20px;
     width: 20px;
-    border: 1px solid black;
-    background-color: #808080;
-    display: inline-block;
-    border-collapse: collapse;
-}
-
-.fieldDiv{
-    width: 30px;
-    height: 30px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    vertical-align: top;
-    background-color: #0ad6ff;
-    border: 1px solid lightgray;
-}
-
-.boardTable td{
-    padding: 0;
-}
-
-.boardHeader{
     background-color: #dddddd;
-    text-align: center;
-    font-weight: bold;
-    width: 15px;
-    height: 15px;
+    display: inline-block;
+    border: 1px solid black;
+    margin: 1px;
 }

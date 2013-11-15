@@ -4,36 +4,48 @@
 <div class="alert alert-danger" ng-show="game.CurrentPlayer == enemy.Name">
     <strong>Enemy's turn!</strong> Wait until player {{enemy.Name}} has made his move.
 </div>
-<div>
-    <p>{{enemy.Name}}:</p>
-    <table class="boardTable" ng-disabled="true">
-        <tr>
-            <td class="boardHeader"></td>
-            <td ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]" class="boardHeader">{{x}}</td>
-        </tr>
-        <tr ng-repeat="(y, row) in enemy.Board">
-            <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]" class="boardHeader"></td>
-            <td ng-repeat="(x, fieldValue) in row" class="boardField">
-                <div class="fieldDiv"
-                     ng-class="{empty: fieldValue==1, hit: fieldValue==2, sunk: fieldValue==3}"
-                     ng-click="bomb(x, y)"></div>
-            </td>
-        </tr>
-    </table>
-</div>
-<div>
-    <p>You:</p>
-    <table class="boardTable" ng-disabled="true">
-        <tr>
-            <td class="boardHeader"></td>
-            <td ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]" class="boardHeader">{{x}}</td>
-        </tr>
-        <tr ng-repeat="(y, row) in player.Board">
-            <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]" class="boardHeader"></td>
-            <td ng-repeat="(x, fieldValue) in row" class="boardField">
-                <div class="fieldDiv"
-                     ng-class="{empty: fieldValue==1, hit: fieldValue==2, sunk: fieldValue==3}"></div>
-            </td>
-        </tr>
-    </table>
+<div class="row">
+    <div class="col-sm-6">
+        <p>{{enemy.Name}}:</p>
+
+        <div class="boardContainer">
+            <div class="dummy"></div>
+            <div class="board">
+                <table class="boardTable">
+                    <tr>
+                        <td></td>
+                        <td class="boardH" ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]">{{x}}</td>
+                    </tr>
+                    <tr ng-repeat="(y, row) in enemy.Board">
+                        <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]"></td>
+                        <td ng-repeat="(x, fieldValue) in row" class="boardF"
+                            ng-class="{empty: fieldValue==1, hit: fieldValue==2, sunk: fieldValue==3}"
+                            ng-click="bomb(x, y)">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <p>you:</p>
+
+        <div class="boardContainer">
+            <div class="dummy"></div>
+            <div class="board">
+                <table class="boardTable">
+                    <tr>
+                        <td></td>
+                        <td class="boardH" ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]">{{x}}</td>
+                    </tr>
+                    <tr ng-repeat="(y, row) in player.Board">
+                        <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]"></td>
+                        <td ng-repeat="(x, fieldValue) in row" class="boardF"
+                            ng-class="{empty: fieldValue==1, hit: fieldValue==2, sunk: fieldValue==3}">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
