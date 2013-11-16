@@ -3,24 +3,8 @@ angular.module('battleships').controller('gameController',
         var gameId = $routeParams.gameId;
         var username = $routeParams.username;
 
-        $scope.$on('gameUpdated', function(event, updatedGameId){
-            if(updatedGameId===gameId){
-                $scope.$apply(loadBoard());
-            } else {
-                toastr.info('game ' + gameId + ' was updated. but not this one :(');
-            }
-        });
-
         loadBoard();
         $scope.gameId = gameId;
-
-        $scope.bomb = function (x, y) {
-            $http.put(serverUrl + 'game/' + gameId + '/' + $scope.enemy.Name + '/board/' + x + ';' + y).success(function (result) {
-                loadBoard();
-            }).error(function(err){
-                    toastr.error(err);
-                });
-        };
 
         function loadBoard() {
             $http.get(serverUrl + 'game/' + gameId).success(function (game) {

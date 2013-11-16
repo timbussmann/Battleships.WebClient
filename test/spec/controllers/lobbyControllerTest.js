@@ -89,16 +89,6 @@ describe('Lobby Controller', function(){
             scope.joinGame();
         });
 
-        it('should show loading screen while waiting for other player', function(){
-            $httpBackend.expectPOST(serverUrl + 'game').respond();
-
-            expect(scope.showLoadingScreen).toBeFalsy();
-
-            scope.joinGame();
-
-            expect(scope.showLoadingScreen).toBe(true);
-        });
-
         describe('when game joined', function(){
 
             it('should switch to game view', function(){
@@ -114,29 +104,6 @@ describe('Lobby Controller', function(){
                 $httpBackend.flush();
 
                 expect($location.path).toHaveBeenCalledWith('/game/' + gameId + '/' + username);
-            });
-
-            it('should hide loading screen', function(){
-                spyOn($location, 'path');
-                $httpBackend.expectPOST(serverUrl + 'game', {
-                    Name: username,
-                    Ships: validShips
-                }).respond({ GameId: 'someGameId' });
-
-                scope.joinGame();
-                $httpBackend.flush();
-
-                expect(scope.showLoadingScreen).toBeFalsy();
-            });
-        });
-
-        describe('when server responds with error', function(){
-            it('should hide loading screen', function(){
-                $httpBackend.expectPOST(serverUrl + 'game').respond(400, 'an error');
-                scope.joinGame();
-                $httpBackend.flush();
-
-                expect(scope.showLoadingScreen).toBeFalsy();
             });
         });
     });
@@ -231,5 +198,4 @@ describe('Lobby Controller', function(){
             {x: 9, y: 1}
         ]
     ];
-
 });
