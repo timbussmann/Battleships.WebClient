@@ -4,7 +4,6 @@ angular.module('battleships').controller('gameController',
         var username = $routeParams.username;
 
         loadBoard();
-        $scope.gameId = gameId;
 
         function loadBoard() {
             $http.get(serverUrl + 'game/' + gameId).success(function (game) {
