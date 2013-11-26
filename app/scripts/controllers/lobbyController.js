@@ -87,21 +87,19 @@ angular.module('battleships').controller('lobbyController', function (
             return group;
         });
 
-        $scope.showLoadingScreen = true;
         $http.post(serverUrl + 'game', {
             Name: username,
             Ships: ships
         }).success(function (result) {
-                $scope.showLoadingScreen = false;
                 toastr.success('joining game ' + result.GameId);
                 $location.path('/game/' + result.GameId + '/' + username);
-            }).error(function (error) {
-                $scope.showLoadingScreen = false;
-                toastr.error(error.ExceptionMessage, error.Message);
-            });
+        }).error(function (error) {
+            toastr.error(error.ExceptionMessage, error.Message);
+        });
     };
 
     $scope.randomShips = function(){
+        // deterministic random generator with limited seed:
         board[0][0] = 1;
         board[1][0] = 1;
         board[2][0] = 1;
@@ -142,6 +140,7 @@ angular.module('battleships').controller('lobbyController', function (
         board[0][9] = 10;
         board[1][9] = 10;
 
+        // empty the availableShips list
         $scope.availableShips.splice(0, $scope.availableShips.length);
     };
 
