@@ -10,8 +10,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      
+    <script src="bower_components/platform/platform.js"></script>
+
+    <link rel="import" href="components/game-board.html">
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
+
         <!-- build:css(.tmp) styles/main.css -->
 
         <link rel="stylesheet" href="bower_components/toastr/toastr.css">
@@ -48,24 +53,24 @@
         </div>
     </div>
 
+
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="libs/jquery.signalR-2.0.0.js"></script>
     <script src="http://localhost:58886/signalr/hubs"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/toastr/toastr.js"></script>
-    <script src="bower_components/polymer/polymer.js.js"></script>
 
-        <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- endbuild -->
+    <!-- build:js scripts/plugins.js -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/externalLibraries.js"></script>
-        <script src="scripts/controllers/lobbyController.js"></script>
-        <script src="scripts/controllers/gameController.js"></script>
-        <script src="scripts/controllers/loginController.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/externalLibraries.js"></script>
+    <script src="scripts/controllers/lobbyController.js"></script>
+    <script src="scripts/controllers/gameController.js"></script>
+    <script src="scripts/controllers/loginController.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
