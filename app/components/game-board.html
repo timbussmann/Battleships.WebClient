@@ -1,19 +1,16 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="game-board">
+<polymer-element name="game-board" attributes="data">
     <template>
         <style>
-
             .boardContainer{
                 display: inline-block;
                 position: relative;
                 width: 100%;
             }
-
             .dummy{
                 margin-top: 100%;
             }
-
             .board{
                 position: absolute;
                 top: 0;
@@ -23,7 +20,6 @@
                 text-align: center;
                 font-size: 12px;
             }
-
             .board .boardH{
                 height: 5%;
             }
@@ -33,11 +29,9 @@
                 background-color: #0ad6ff;
                 border: 1px solid #dddddd;;
             }
-
             .boardF:hover{
                 border: 1px solid black;
             }
-
             .boardTable {
                 background-color: #dddddd;
                 border: 1px solid black;
@@ -46,29 +40,23 @@
                 width: 100%;
                 height: 100%;
             }
-
             .boardTable .ship {
                 background-color: #808080;
                 border: 1px solid #808080;
             }
-
             .boardTable .empty {
                 background-color: blue;
             }
-
             .boardTable .hit {
                 background-color: red;
             }
-
             .boardTable .sunk {
                 background-color: darkred;
                 border: 1px solid darkred;
             }
-
             .boardTable .selected {
                 background-color: yellow;
             }
-
             .fieldDiv:not(.ship):hover {
                 border: 1px solid #000000;
             }
@@ -76,155 +64,38 @@
         <div class="boardContainer">
             <div class="dummy"></div>
             <div class="board">
-                <table class="boardTable" id="boardTable">
+                <table class="boardTable">
                     <tr>
                         <td></td>
-                        <td class="boardH">1</td>
-                        <td class="boardH">2</td>
-                        <td class="boardH">3</td>
-                        <td class="boardH">4</td>
-                        <td class="boardH">5</td>
-                        <td class="boardH">6</td>
-                        <td class="boardH">7</td>
-                        <td class="boardH">8</td>
-                        <td class="boardH">9</td>
-                        <td class="boardH">10</td>
+                        <template repeat="{{column in columns}}">
+                            <td class="boardH">{{column}}</td>
+                        </template>
                     </tr>
-                    <tr>
-                        <td>A</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>C</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>D</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>E</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>F</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>G</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>H</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>I</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
-                    <tr>
-                        <td>J</td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                        <td class="boardF empty"></td>
-                    </tr>
+                    <template repeat="{{row, rowIndex in rows}}">
+                        <tr>
+                            <td>{{row}}</td>
+                            <template repeat="{{column, columnIndex in columns}}">
+                                <td class="boardF">{{parsedData[rowIndex][columnIndex]}}</td>
+                            </template>
+                        </tr>
+                    </template>
                 </table>
             </div>
         </div>
     </template>
     <script>
-        Polymer('game-board');
+        Polymer('game-board', {
+            created: function () {
+                this.rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+                this.columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                this.parsedData = [];
+            },
+            ready: function () {
+
+            },
+            dataChanged: function(ka, value){
+                this.parsedData = JSON.parse(value);
+            }
+        });
     </script>
 </polymer-element>
