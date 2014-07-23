@@ -1,5 +1,5 @@
 'use strict'
-angular.module('battleships', []
+angular.module('battleships', ['ui.event']
     ).config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

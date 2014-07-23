@@ -75,7 +75,10 @@
                         <tr>
                             <td>{{row}}</td>
                             <template repeat="{{column, columnIndex in columns}}">
-                                <td class="boardF">{{parsedData[rowIndex][columnIndex]}}</td>
+                                <td class="boardF {{ {ship: parsedData[rowIndex][columnIndex] > 0, selected: parsedData[rowIndex][columnIndex] < 0 } | tokenList }}"
+                                    on-Click="{{ onFieldClicked }}"
+                                    data-X="{{columnIndex}}"
+                                    data-Y="{{rowIndex}}"></td>
                             </template>
                         </tr>
                     </template>
@@ -93,8 +96,11 @@
             ready: function () {
 
             },
-            dataChanged: function(ka, value){
-                this.parsedData = JSON.parse(value);
+            dataChanged: function(oldValue, newValue){
+                this.parsedData = JSON.parse(newValue);
+            },
+            onFieldClicked: function(event, detail, target){
+                this.fire('fieldClicked', { x: target.dataset.x, y: target.dataset.y });
             }
         });
     </script>
