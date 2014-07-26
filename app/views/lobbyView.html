@@ -29,7 +29,7 @@
 </div>
 <div class="row">
     <div class="col-sm-8">
-        <game-board data="{{board}}" ui-event="{ fieldClicked: 'fieldSelected($event)' }"></game-board>
+        <game-board data="{{board}}" ng-click="fieldSelected($event)"></game-board>
     </div>
 </div>
 <div class="row" >

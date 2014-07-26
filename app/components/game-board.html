@@ -61,7 +61,7 @@
                 border: 1px solid #000000;
             }
         </style>
-        <div class="boardContainer">
+        <div class="boardContainer" on-click="{{onClick}}">
             <div class="dummy"></div>
             <div class="board">
                 <table class="boardTable">
@@ -99,8 +99,13 @@
             dataChanged: function(oldValue, newValue){
                 this.parsedData = JSON.parse(newValue);
             },
+            onClick: function(event){
+                // do not raise the default on click event
+                // because we need to enhance the event the x/y coordinates of the clicked field
+                event.stopPropagation();
+            },
             onFieldClicked: function(event, detail, target){
-                this.fire('fieldClicked', { x: target.dataset.x, y: target.dataset.y });
+                this.fire('click', { x: target.dataset.x, y: target.dataset.y });
             }
         });
     </script>
