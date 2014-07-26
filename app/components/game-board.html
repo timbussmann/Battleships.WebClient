@@ -97,7 +97,12 @@
 
             },
             dataChanged: function(oldValue, newValue){
-                this.parsedData = JSON.parse(newValue);
+                try{
+                    this.parsedData = JSON.parse(newValue);
+                } catch(err) {
+                    // create an empty board when parsing fails (probably due to empty input)
+                    this.parsedData = _.map(new Array(10), function(){ return _.range(0, 10, 0);});
+                }
             },
             onClick: function(event){
                 // do not raise the default on click event
