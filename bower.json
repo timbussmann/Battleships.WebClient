@@ -11,7 +11,8 @@
     "bootstrap": "~3.0.1",
     "toastr": "~2.0.1",
     "polymer": "~0.3.3",
-    "polymer-platform": "~0.3.4"
+    "polymer-platform": "~0.3.4",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",

@@ -1,7 +1,7 @@
 
 <div class="row" loading-screen-modal="showLoadingScreen">
     <div class="col-sm-8">
-        <game-board data="{{board}}" ng-click="fieldSelected($event)"></game-board>
+        <game-board data="{{board | mapToBoardColors }}" ng-click="fieldSelected($event)"></game-board>
     </div>
     <div class="col-sm-4">
         <div id="shipCounter">

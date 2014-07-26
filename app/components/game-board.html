@@ -75,7 +75,7 @@
                         <tr>
                             <td>{{row}}</td>
                             <template repeat="{{column, columnIndex in columns}}">
-                                <td class="boardF {{ {ship: parsedData[rowIndex][columnIndex] > 0, selected: parsedData[rowIndex][columnIndex] < 0 } | tokenList }}"
+                                <td class="boardF {{ {ship: parsedData[rowIndex][columnIndex] == 4, selected: parsedData[rowIndex][columnIndex] == 5 } | tokenList }}"
                                     on-Click="{{ onFieldClicked }}"
                                     data-X="{{columnIndex}}"
                                     data-Y="{{rowIndex}}"></td>
