@@ -1,23 +1,7 @@
 
 <div class="row" loading-screen-modal="showLoadingScreen">
     <div class="col-sm-8">
-        <div class="boardContainer">
-            <div class="dummy"></div>
-            <div class="board">
-                <table class="boardTable">
-                    <tr>
-                        <td></td><td class="boardH" ng-repeat="x in [1,2,3,4,5,6,7,8,9,10]">{{x}}</td>
-                    </tr>
-                    <tr ng-repeat="(y, row) in board">
-                        <td ng-bind="['A','B','C','D','E','F','G','H','I','J'][y]"></td>
-                        <td ng-repeat="(x, fieldValue) in row" class="boardF"
-                            ng-class="{ship: fieldValue > 0, selected: fieldValue < 0}"
-                            ng-click="select(x, y)">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <game-board data="{{board}}" ng-click="fieldSelected($event)"></game-board>
     </div>
     <div class="col-sm-4">
         <div id="shipCounter">
@@ -25,11 +9,6 @@
                 <span ng-repeat="slot in range(shipLength)"></span>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-8">
-        <game-board data="{{board}}" ng-click="fieldSelected($event)"></game-board>
     </div>
 </div>
 <div class="row" >
