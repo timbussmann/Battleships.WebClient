@@ -40,7 +40,7 @@
                 width: 100%;
                 height: 100%;
             }
-            .boardTable .state4 {
+            .boardTable .ship {
                 background-color: #808080;
                 border: 1px solid #808080;
             }
@@ -54,7 +54,7 @@
                 background-color: darkred;
                 border: 1px solid darkred;
             }
-            .boardTable .state5 {
+            .boardTable .selected {
                 background-color: yellow;
             }
             .fieldDiv:not(.ship):hover {
@@ -75,7 +75,7 @@
                         <tr>
                             <td>{{row}}</td>
                             <template repeat="{{column, columnIndex in columns}}">
-                                <td class="boardF state{{parsedData[rowIndex][columnIndex]}}"
+                                <td class="boardF {{ getClass(parsedData[rowIndex][columnIndex])}}"
                                     on-Click="{{ onFieldClicked }}"
                                     data-X="{{columnIndex}}"
                                     data-Y="{{rowIndex}}"></td>
@@ -106,6 +106,16 @@
             },
             onFieldClicked: function(event, detail, target){
                 this.fire('click', { x: target.dataset.x, y: target.dataset.y });
+            },
+            getClass: function(value){
+                switch (value){
+                    case 1: return 'empty';
+                    case 2: return 'hit';
+                    case 3: return 'sunk';
+                    case 4: return 'ship';
+                    case 5: return 'selected';
+                    default: return '';
+                }
             }
         });
     </script>
