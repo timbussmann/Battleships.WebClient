@@ -1,0 +1,127 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="game-board" attributes="data">
+    <template>
+        <style>
+            .boardContainer{
+                display: inline-block;
+                position: relative;
+                width: 100%;
+            }
+            .dummy{
+                margin-top: 100%;
+            }
+            .board{
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 12px;
+            }
+            .board .boardH{
+                height: 5%;
+            }
+            .board .boardF{
+                width: 9.5%;
+                box-sizing: border-box;
+                background-color: #0ad6ff;
+                border: 1px solid #dddddd;;
+            }
+            .boardF:hover{
+                border: 1px solid black;
+            }
+            .boardTable {
+                background-color: #dddddd;
+                border: 1px solid black;
+                border-collapse: separate;
+                border-spacing: 0px;
+                width: 100%;
+                height: 100%;
+            }
+            .boardTable .ship {
+                background-color: #808080;
+                border: 1px solid #808080;
+            }
+            .boardTable .empty {
+                background-color: blue;
+            }
+            .boardTable .hit {
+                background-color: red;
+            }
+            .boardTable .sunk {
+                background-color: darkred;
+                border: 1px solid darkred;
+            }
+            .boardTable .selected {
+                background-color: yellow;
+            }
+            .fieldDiv:not(.ship):hover {
+                border: 1px solid #000000;
+            }
+        </style>
+        <div class="boardContainer" on-click="{{onClick}}">
+            <div class="dummy"></div>
+            <div class="board">
+                <table class="boardTable">
+                    <tr>
+                        <td></td>
+                        <template repeat="{{column in columns}}">
+                            <td class="boardH">{{column}}</td>
+                        </template>
+                    </tr>
+                    <template repeat="{{row, rowIndex in rows}}">
+                        <tr>
+                            <td>{{row}}</td>
+                            <template repeat="{{column, columnIndex in columns}}">
+                                <td class="boardF {{ getClass(parsedData[rowIndex][columnIndex])}}"
+                                    on-Click="{{ onFieldClicked }}"
+                                    data-X="{{columnIndex}}"
+                                    data-Y="{{rowIndex}}"></td>
+                            </template>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer('game-board', {
+            created: function () {
+                this.rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+                this.columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                this.parsedData = [];
+            },
+            ready: function () {
+
+            },
+            dataChanged: function(oldValue, newValue){
+                try{
+                    this.parsedData = JSON.parse(newValue);
+                } catch(err) {
+                    // create an empty board when parsing fails (probably due to empty input)
+                    this.parsedData = _.map(new Array(10), function(){ return _.range(0, 10, 0);});
+                }
+            },
+            onClick: function(event){
+                // do not raise the default on click event
+                // because we need to enhance the event the x/y coordinates of the clicked field
+                event.stopPropagation();
+            },
+            onFieldClicked: function(event, detail, target){
+                this.fire('click', { x: target.dataset.x, y: target.dataset.y });
+            },
+            getClass: function(value){
+                switch (value){
+                    case 1: return 'empty';
+                    case 2: return 'hit';
+                    case 3: return 'sunk';
+                    case 4: return 'ship';
+                    case 5: return 'selected';
+                    default: return '';
+                }
+            }
+        });
+    </script>
+</polymer-element>

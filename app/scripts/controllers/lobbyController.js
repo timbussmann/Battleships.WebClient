@@ -18,6 +18,11 @@ angular.module('battleships').controller('lobbyController', function (
 
     $scope.board = board;
     $scope.availableShips = shipsToUse.slice(0);
+    $scope.fieldSelected = function(event){
+        var originalEvent = event.originalEvent;
+        $scope.select(originalEvent.detail.x, originalEvent.detail.y);
+    };
+
     var selected;
     $scope.select = function (x, y) {
         if (!selected) {

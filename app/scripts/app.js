@@ -20,4 +20,13 @@ angular.module('battleships', []
 
         //$locationProvider.html5Mode(true);
         }
-    ).constant('serverUrl', 'http://localhost:58886/');
+).filter('mapToBoardColors', function() {
+        return function(board){
+            return _.map(board, function(row){
+                return _.map(row, function(field){
+                    return field > 0 ? 4 : field < 0 ? 5 : 0;
+                });
+            });
+        }
+    }
+).constant('serverUrl', 'http://localhost:58886/');
